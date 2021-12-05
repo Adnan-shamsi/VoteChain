@@ -28,7 +28,7 @@ class TransactionMiner {
 
     const finalData = {
       data: {
-        transaction: {
+        transactions: {
           votingTransactions: validVotingTransactions,
           rewardTransactions: validRewardTransactions,
           newCommers: validNewCommers,
