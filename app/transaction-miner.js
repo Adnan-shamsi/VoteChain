@@ -9,11 +9,10 @@ class TransactionMiner {
   }
 
   mineTransactions() {
-    
-    if(!this.transactionPool.questionMap){
-      return console.error("no Block to be Mined!!")
+    if (!this.transactionPool.questionMap) {
+      return console.error("no Block to be Mined!!");
     }
-      
+
     const validVotingTransactions =
       this.transactionPool.validVotingTransactions();
 
@@ -28,10 +27,13 @@ class TransactionMiner {
     const validNewCommers = []; //need to be updated
 
     const finalData = {
-      transaction: {
-        votingTransactions: validVotingTransactions,
-        rewardTransactions: validRewardTransactions,
-        newCommers: validNewCommers,
+      data: {
+        transaction: {
+          votingTransactions: validVotingTransactions,
+          rewardTransactions: validRewardTransactions,
+          newCommers: validNewCommers,
+        },
+        questionMap: this.transactionPool.questionMap,
       },
     };
 
