@@ -1,45 +1,60 @@
-// const Transaction = require('./transaction');
+const Transaction = require("./transaction");
 
-// class TransactionPool {
-//   constructor() {
-//     this.transactionMap = {};
-//   }
+class TransactionPool {
+  constructor() {
+    this.transactions = {
+      votingTransactions: {},
+      newCommers: {},
+      rewardTransactions: {},
+    };
 
-//   clear() {
-//     this.transactionMap = {};
-//   }
+    this.questionMap = {};
+  }
 
-//   setTransaction(transaction) {
-//     this.transactionMap[transaction.id] = transaction;
-//   }
+  clear() {
+    this.transactions = {
+      votingTransactions: {},
+      newCommers: {},
+      rewardTransactions: {},
+    };
 
-//   setMap(transactionMap) {
-//     this.transactionMap = transactionMap;
-//   }
+    this.questionMap = {};
+  }
 
-//   existingTransaction({ inputAddress }) {
-//     const transactions = Object.values(this.transactionMap);
+  setVotingTransaction(transaction) {
+    this.transactions.votingTransactions[transaction.id] = transaction;
+  }
+  
+  processAllValidRewards(validVotingTransactions){
+   //give rewards to the winner
+  }
+  
+  validateNewCommers(){
+   //to return all valid newCommers
+  }
+  
+  setMap(transactions, questionMap) {
+    this.transactions = transactions;
+    this.questionMap = questionMap;
+  }
 
-//     return transactions.find(transaction => transaction.input.address === inputAddress);
-//   }
+  existingVotingTransaction({ inputAddress }) {
+    const transactions = Object.values(this.transactions.votingTransactions);
 
-//   validTransactions() {
-//     return Object.values(this.transactionMap).filter(
-//       transaction => Transaction.validTransaction(transaction)
-//     );
-//   }
+    return transactions.find(
+      (transaction) => transaction.input.address === inputAddress
+    );
+  }
 
-//   clearBlockchainTransactions({ chain }) {
-//     for (let i=1; i<chain.length; i++) {
-//       const block = chain[i];
+  validVotingTransactions() {
+    return Object.values(this.transactions.votingTransactions).filter((transaction) =>
+      Transaction.validTransaction(transaction)
+    );
+  }
 
-//       for (let transaction of block.data) {
-//         if (this.transactionMap[transaction.id]) {
-//           delete this.transactionMap[transaction.id];
-//         }
-//       }
-//     }
-//   }
-// }
+  clearBlockchainTransactions({ chain }) {
+    this.clear();
+  }
+}
 
-// module.exports = TransactionPool;
+module.exports = TransactionPool;
