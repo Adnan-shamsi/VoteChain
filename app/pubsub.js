@@ -3,7 +3,10 @@ const redis = require('redis');
 const CHANNELS = {
   TEST: 'TEST',
   BLOCKCHAIN: 'BLOCKCHAIN',
-  TRANSACTION: 'TRANSACTION'
+  VOTING_TRANSACTION: 'VOTING_TRANSACTION',
+  NEW_COMMER_TRANSACTION: 'NEW_COMMER_TRANSACTION',
+  POLL_QUESTION: 'POLL_QUESTION',
+  POOL_REFRESH :"POOL_REFRESH" ,
 };
 
 class PubSub {
@@ -35,8 +38,8 @@ class PubSub {
           });
         });
         break;
-      case CHANNELS.TRANSACTION:
-        this.transactionPool.setTransaction(parsedMessage);
+      case CHANNELS.VOTING_TRANSACTION:
+        this.transactionPool.setVotingTransaction(parsedMessage);
         break;
       default:
         return;
@@ -64,12 +67,34 @@ class PubSub {
     });
   }
 
-  broadcastTransaction(transaction) {
+  broadcastVotingTransaction(transaction) {
     this.publish({
-      channel: CHANNELS.TRANSACTION,
+      channel: CHANNELS.VOTING_TRANSACTION,
       message: JSON.stringify(transaction)
     });
   }
+  
+  broadcastNewCommerTransaction(transaction) {
+    this.publish({
+      channel: CHANNELS.NEW_COMMER_TRANSACTION,
+      message: JSON.stringify(transaction)
+    });
+  }
+
+  broadcastQuestion(question) {
+    this.publish({
+      channel: CHANNELS.POLL_QUESTION,
+      message: JSON.stringify(question)
+    });
+  }
+
+  broadcastClearPool() {
+    this.publish({
+      channel: CHANNELS.POOL_REFRESH,
+      message: null
+    });
+  }
+
 }
 
 module.exports = PubSub;
