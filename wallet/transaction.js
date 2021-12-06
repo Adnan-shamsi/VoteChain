@@ -61,7 +61,7 @@ class Transaction {
     });
   }
 
-  winnerTransaction({ winnerWallet, award }) {
+  static winnerTransaction({ winnerWallet, award }) {
     return new this({
       input: WINNER_INPUT_ALLOCATOR,
       outputMap: { [winnerWallet.publicKey]: 1 + award },
