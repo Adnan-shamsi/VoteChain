@@ -1,74 +1,72 @@
-// const uuid = require('uuid/v1');
-// const { verifySignature } = require('../util');
-// const { REWARD_INPUT_ALLOCATOR, MINING_REWARD } = require('../config');
+const uuid = require("uuid/v1");
+const { verifySignature } = require("../util");
+const {
+  REWARD_INPUT_ALLOCATOR,
+  MINING_REWARD,
+  WINNER_INPUT_ALLOCATOR,
+} = require("../config");
 
-// class Transaction {
-//   constructor({ senderWallet, recipient, amount, outputMap, input }) {
-//     this.id = uuid();
-//     this.outputMap = outputMap || this.createOutputMap({ senderWallet, recipient, amount });
-//     this.input = input || this.createInput({ senderWallet, outputMap: this.outputMap });
-//   }
+class Transaction {
+  constructor({ senderWallet, recipient, amount }) {
+    this.id = uuid();
+    this.outputMap = this.createOutputMap({ senderWallet, recipient, amount });
+    this.input = this.createInput({ senderWallet, outputMap: this.outputMap });
+  }
 
-//   createOutputMap({ senderWallet, recipient, amount }) {
-//     const outputMap = {};
+  createOutputMap({ senderWallet, recipient, amount }) {
+    const outputMap = {};
 
-//     outputMap[recipient] = amount;
-//     outputMap[senderWallet.publicKey] = senderWallet.balance - amount;
+    outputMap[recipient] = amount;
+    outputMap[senderWallet.publicKey] = senderWallet.balance - amount;
 
-//     return outputMap;
-//   }
+    return outputMap;
+  }
 
-//   createInput({ senderWallet, outputMap }) {
-//     return {
-//       timestamp: Date.now(),
-//       amount: senderWallet.balance,
-//       address: senderWallet.publicKey,
-//       signature: senderWallet.sign(outputMap)
-//     };
-//   }
+  createInput({ senderWallet, outputMap }) {
+    return {
+      timestamp: Date.now(),
+      amount: senderWallet.balance,
+      address: senderWallet.publicKey,
+      signature: senderWallet.sign(outputMap),
+    };
+  }
 
-//   update({ senderWallet, recipient, amount }) {
-//     if (amount > this.outputMap[senderWallet.publicKey]) {
-//       throw new Error('Amount exceeds balance');
-//     }
+  static validVotingTransaction(transaction) {
+    const {
+      input: { address, amount, signature },
+      outputMap,
+    } = transaction;
 
-//     if (!this.outputMap[recipient]) {
-//       this.outputMap[recipient] = amount;
-//     } else {
-//       this.outputMap[recipient] = this.outputMap[recipient] + amount;
-//     }
+    const outputTotal = Object.values(outputMap).reduce(
+      (total, outputAmount) => total + outputAmount
+    );
 
-//     this.outputMap[senderWallet.publicKey] =
-//       this.outputMap[senderWallet.publicKey] - amount;
+    if (amount !== outputTotal) {
+      console.error(`Invalid transaction from ${address}`);
+      return false;
+    }
 
-//     this.input = this.createInput({ senderWallet, outputMap: this.outputMap });
-//   }
+    if (!verifySignature({ publicKey: address, data: outputMap, signature })) {
+      console.error(`Invalid signature from ${address}`);
+      return false;
+    }
 
-//   static validTransaction(transaction) {
-//     const { input: { address, amount, signature }, outputMap } = transaction;
+    return true;
+  }
 
-//     const outputTotal = Object.values(outputMap)
-//       .reduce((total, outputAmount) => total + outputAmount);
+  static rewardTransaction({ minerWallet }) {
+    return new this({
+      input: REWARD_INPUT_ALLOCATOR,
+      outputMap: { [minerWallet.publicKey]: MINING_REWARD },
+    });
+  }
 
-//     if (amount !== outputTotal) {
-//       console.error(`Invalid transaction from ${address}`);
-//       return false;
-//     }
+  static winnerTransaction({ winnerWallet, award }) {
+    return new this({
+      input: WINNER_INPUT_ALLOCATOR,
+      outputMap: { [winnerWallet.publicKey]: 1 + award },
+    });
+  }
+}
 
-//     if (!verifySignature({ publicKey: address, data: outputMap, signature })) {
-//       console.error(`Invalid signature from ${address}`);
-//       return false;
-//     }
-
-//     return true;
-//   }
-
-//   static rewardTransaction({ minerWallet }) {
-//     return new this({
-//       input:REWARD_INPUT_ALLOCATOR,
-//       outputMap: { [minerWallet.publicKey]: MINING_REWARD }
-//     });
-//   }
-// }
-
-// module.exports = Transaction;
+module.exports = Transaction;
