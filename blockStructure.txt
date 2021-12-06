@@ -1,0 +1,36 @@
+TimeStamp: 0121212
+difficulty : 5
+nonce: 101
+hash: ewqwqeq
+last_hash: fwwrewfsdf
+
+
+data: {
+  transactions: {
+    votingTransactions: [{x},{x}],
+    rewardTransactions: [{y},{},{}], // both winning reward and mining reward 
+    newCommerTransactions: [{},{},{}],                    //not yet decided
+  },
+  questionMap: {question:"fsdf",choices = ['yes','no'] },
+},
+
+
+
+
+variables
+/////////////////////////////////////////
+
+x = {
+        id:uuid(),
+        outputMap,
+        input:{ 
+          timestamp: Date.now(),
+          amount: senderWallet.balance,
+          address: senderWallet.publicKey,
+          signature: senderWallet.sign(outputMap)
+        }
+}
+
+
+
+y = { input:{address}, outputMap}

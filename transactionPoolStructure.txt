@@ -1,0 +1,9 @@
+TransactionPool
+{
+    this.transactions = {
+      votingTransactions: {},
+      newCommerTransactions: {},
+    };
+
+    this.questionMap = {};
+}

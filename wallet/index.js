@@ -38,13 +38,17 @@ class Wallet {
       const { votingTransaction, rewardTransactions } = chain[i].transactions;
 
       for (let transaction of rewardTransactions) {
-        if (transaction.recipient === address)
-          outputsTotal = outputsTotal + transaction.reward;
+        const addressOutput = transaction.outputMap[address];
+        if (addressOutput) {
+          outputsTotal = outputsTotal + addressOutput;
+        }
       }
       
       for(let transaction of newCommerTransactions){
-        if(transaction.recipient === address)
-          outputsTotal = outputsTotal + transaction.reward;
+        const addressOutput = transaction.outputMap[address];
+        if (addressOutput) {
+          outputsTotal = outputsTotal + addressOutput;
+        }
       }
 
       for (let transaction of votingTransaction) {
