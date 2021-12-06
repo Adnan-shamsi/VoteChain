@@ -41,6 +41,11 @@ class Wallet {
         if (transaction.recipient === address)
           outputsTotal = outputsTotal + transaction.reward;
       }
+      
+      for(let transaction of newCommerTransactions){
+        if(transaction.recipient === address)
+          outputsTotal = outputsTotal + transaction.reward;
+      }
 
       for (let transaction of votingTransaction) {
         if (transaction.input.address === address) {

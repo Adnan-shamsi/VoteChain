@@ -41,6 +41,9 @@ class PubSub {
       case CHANNELS.VOTING_TRANSACTION:
         this.transactionPool.setVotingTransaction(parsedMessage);
         break;
+      case CHANNELS.POLL_QUESTION:
+        this.transactionPool.setQuestion(parsedMessage);
+        break;
       default:
         return;
     }

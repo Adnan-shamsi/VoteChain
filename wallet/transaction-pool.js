@@ -4,18 +4,16 @@ class TransactionPool {
   constructor() {
     this.transactions = {
       votingTransactions: {},
-      newCommers: {},
-      rewardTransactions: {},
+      newCommerTransactions: {},
     };
 
     this.questionMap = {};
   }
 
-  clear() {
+  clear(){
     this.transactions = {
       votingTransactions: {},
-      newCommers: {},
-      rewardTransactions: {},
+      newCommerTransactions: {},
     };
 
     this.questionMap = {};
@@ -25,15 +23,17 @@ class TransactionPool {
     this.transactions.votingTransactions[transaction.id] = transaction;
   }
   
-  processAllValidRewards(validVotingTransactions){
-   //give rewards to the winner
+  setQuestion(questionData) {
+    //questionData obj {question:'dadasd',choices:['yes','no']}
+    this.transactions.questionMap = questionData;
   }
   
-  validateNewCommers(){
-   //to return all valid newCommers
+  setNewCommerTransaction(newCommerTransaction){
+    //newCommerTransaction obj [{'sender_address','address', 'id' aka timestamp, 'signature assigned by central server'}]
+    this.transactions.newCommerTransactions[newCommerTransaction.id] = newCommerTransaction;
   }
   
-  setMap(transactions, questionMap) {
+  setMap({transactions, questionMap}) {
     this.transactions = transactions;
     this.questionMap = questionMap;
   }
@@ -45,10 +45,24 @@ class TransactionPool {
       (transaction) => transaction.input.address === inputAddress
     );
   }
+  
+  existingNewCommerTransaction({ inputAddress }) {
+    const transactions = Object.values(this.transactions.newCommerTransactions);
+    
+    return transactions.find(
+      (transaction) => transaction.input.address === inputAddress
+    );
+  }
 
   validVotingTransactions() {
     return Object.values(this.transactions.votingTransactions).filter((transaction) =>
-      Transaction.validTransaction(transaction)
+      Transaction.validVotingTransaction(transaction)
+    );
+  }
+
+  validnewCommerTransactions() {
+    return Object.values(this.transactions.newCommerTransactions).filter((transaction) =>
+      Transaction.validNewCommerTransaction(transaction)
     );
   }
 

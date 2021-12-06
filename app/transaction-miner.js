@@ -8,6 +8,12 @@ class TransactionMiner {
     this.pubsub = pubsub;
   }
 
+  allocateReward(validVotingTransactions){
+    //allocating rewards
+    //who all won 
+    //if tie allocate to all of them
+  }
+  
   mineTransactions() {
     if (!this.transactionPool.questionMap) {
       return console.error("no Block to be Mined!!");
@@ -16,7 +22,7 @@ class TransactionMiner {
     const validVotingTransactions =
       this.transactionPool.validVotingTransactions();
 
-    const validRewardTransactions = this.transactionPool.processAllValidRewards(
+    const validRewardTransactions = this.allocateRewards(
       validVotingTransactions
     );
 
@@ -31,7 +37,7 @@ class TransactionMiner {
         transactions: {
           votingTransactions: validVotingTransactions,
           rewardTransactions: validRewardTransactions,
-          newCommers: validNewCommers,
+          newCommerTransactions: validNewCommers,
         },
         questionMap: this.transactionPool.questionMap,
       },
