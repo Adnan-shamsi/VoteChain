@@ -9,64 +9,6 @@ class TransactionMiner {
     this.pubsub = pubsub;
   }
 
-  allocateReward(validVotingTransactions) {
-    //allocating rewards
-    //who all won
-    //if tie allocate to all of them
-
-    const countFrequencies = {};
-    let mx = 0;
-
-    for (let transaction of validVotingTransactions) {
-      const choice = Object.keys(transaction.outputMap);
-
-      if (countFrequencies[choice]) {
-        countFrequencies[choice]++;
-      } else {
-        countFrequencies[choice] = 1;
-      }
-      mx = Math.max(countFrequencies[choice], mx);
-    }
-
-    const optionWon = []; //single item but in case of tie more than one output
-    let total_won = 0;
-    let total_loss = 0;
-
-    Object.keys(countFrequencies).forEach((key) => {
-      if (countFrequencies[key] == mx) {
-        total_won += countFrequencies[key];
-        optionWon.push(key);
-      } else {
-        total_loss += countFrequencies[key];
-      }
-    });
-
-    if (total_won == 0) {
-      return [];
-    }
-
-    const rewardTransaction = [];
-
-    let award = total_loss / total_won;
-    
-    award = Math.round(num * 1000) / 1000;
-
-    for (let transaction of validVotingTransactions) {
-      const choice = Object.keys(transaction.outputMap);
-
-      if (optionWon.includes(choice)) {
-        rewardTransaction.push(
-          Transaction.winnerTransaction({
-            winnerWallet: transaction.input.address,
-            award,
-          })
-        );
-      }
-    }
-
-    return rewardTransaction;
-  }
-
   mineTransactions() {
     if (!this.transactionPool.questionMap) {
       return console.error("no Block to be Mined!!");
@@ -75,7 +17,7 @@ class TransactionMiner {
     const validVotingTransactions =
       this.transactionPool.validVotingTransactions();
 
-    const validRewardTransactions = this.allocateRewards(
+    const validRewardTransactions = this.Transaction.allocateWinnerRewards(
       validVotingTransactions
     );
 

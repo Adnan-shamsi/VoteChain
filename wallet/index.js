@@ -44,12 +44,12 @@ class Wallet {
         }
       }
       
-      for(let transaction of newCommerTransactions){
-        const addressOutput = transaction.outputMap[address];
-        if (addressOutput) {
-          outputsTotal = outputsTotal + addressOutput;
-        }
-      }
+      // for(let transaction of newCommerTransactions){
+      //   const addressOutput = transaction.outputMap[address];
+      //   if (addressOutput) {
+      //     outputsTotal = outputsTotal + addressOutput;
+      //   }
+      // }
 
       for (let transaction of votingTransaction) {
         if (transaction.input.address === address) {

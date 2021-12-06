@@ -1,5 +1,5 @@
 const uuid = require("uuid/v1");
-const { verifySignature } = require("../util");
+const { verifySignature, cryptoHash } = require("../util");
 const {
   REWARD_INPUT_ALLOCATOR,
   MINING_REWARD,
@@ -52,6 +52,76 @@ class Transaction {
     }
 
     return true;
+  }
+
+  static validateWinnerTransactions({ votingTransactions, winners }) {
+    const expectedWinners = this.allocateWinnerRewards(votingTransactions);
+
+    if (cryptoHash(expectedWinners) !== cryptoHash(winners)) {
+      return false;
+    }
+  }
+
+  static allocateWinnerRewards(validVotingTransactions) {
+    //allocating rewards
+    //who all won
+    //if tie allocate to all of them
+
+    const countFrequencies = {};
+    let mx = 0;
+
+    for (let transaction of validVotingTransactions) {
+      let choice = Object.keys(transaction.outputMap).filter(
+        (key) => transaction.input.address !== key
+      )[0];
+
+      if (countFrequencies[choice]) {
+        countFrequencies[choice]++;
+      } else {
+        countFrequencies[choice] = 1;
+      }
+      mx = Math.max(countFrequencies[choice], mx);
+    }
+
+    const optionWon = []; //single item but in case of tie more than one output
+    let total_won = 0;
+    let total_loss = 0;
+
+    Object.keys(countFrequencies).forEach((key) => {
+      if (countFrequencies[key] == mx) {
+        total_won += countFrequencies[key];
+        optionWon.push(key);
+      } else {
+        total_loss += countFrequencies[key];
+      }
+    });
+
+    if (total_won == 0) {
+      return [];
+    }
+
+    const rewardTransaction = [];
+
+    let award = total_loss / total_won;
+
+    award = Math.round(num * 1000) / 1000;
+
+    for (let transaction of validVotingTransactions) {
+      const choice = Object.keys(transaction.outputMap).filter(
+        (key) => transaction.input.address !== key
+      )[0];
+
+      if (optionWon.includes(choice)) {
+        rewardTransaction.push(
+          Transaction.winnerTransaction({
+            winnerWallet: transaction.input.address,
+            award,
+          })
+        );
+      }
+    }
+
+    return rewardTransaction;
   }
 
   static rewardTransaction({ minerWallet }) {
