@@ -1,4 +1,3 @@
-const bodyParser = require("body-parser");
 const express = require("express");
 const request = require("request");
 const path = require("path");
@@ -27,7 +26,7 @@ const transactionMiner = new TransactionMiner({
   pubsub,
 });
 
-app.use(bodyParser.json());
+app.use(express.json());
 
 app.get("/api/blocks", (req, res) => {
   res.json(blockchain.chain);
