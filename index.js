@@ -2,6 +2,7 @@ const express = require("express");
 const request = require("request");
 
 const apiRouter = require('./routes/api')
+const mainNodeRouter = require('./routes/mainNode')
 const { blockchain, transactionPool } = require('./util/instances')
 
 const isDevelopment = process.env.ENV === "development";
@@ -14,7 +15,7 @@ app.use(express.json());
 
 app.use('/api', apiRouter)
 
-app.use('/main/api',)
+app.use('/main/api', mainNodeRouter)
 
 const syncWithRootState = () => {
 	request({ url: `${ROOT_NODE_ADDRESS}/api/blocks` }, (error, response, body) => {

@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest --watchAll",
     "start": "node index.js",
-    "dev": "npm run dev-client & npm run start-redis && cross-env ENV='development' nodemon index.js",
+    "dev": "nodemon index.js",
     "dev-peer": "cross-env GENERATE_PEER_PORT='true' ENV='development' nodemon index.js",
     "start-redis": "redis-server --daemonize yes",
     "clean": "rm -rf .cache client/dist"
@@ -27,6 +27,7 @@
     "express": "^4.17.1",
     "hex-to-binary": "^1.0.1",
     "pubnub": "^4.36.0",
+    "redis": "^4.0.1",
     "request": "^2.88.0",
     "uuid": "^8.3.2"
   }
