@@ -51,7 +51,7 @@ router.post("/transact", (req, res) => {
 		return res.status(400).json({ type: "error", message: "invalid choice" });
 	}
 
-	let transaction = transactionPool.existingTransaction({
+	let transaction = transactionPool.existingVotingTransaction({
 		inputAddress: wallet.publicKey,
 	});
 
@@ -62,8 +62,8 @@ router.post("/transact", (req, res) => {
 				amount,
 				chain: blockchain.chain,
 			});
-			transactionPool.setTransaction(transaction);
-			pubsub.broadcastTransaction(transaction);
+			transactionPool.setVotingTransaction(transaction);
+			pubsub.broadcastVotingTransaction(transaction);
 		} else {
 			throw new Error("You have already casted your vote");
 		}

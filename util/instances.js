@@ -6,7 +6,7 @@ const TransactionMiner = require("../app/transaction-miner");
 
 const isDevelopment = process.env.ENV === "development";
 
-const REDIS_URL = null;
+const REDIS_URL = "redis://127.0.0.1:6379";
 
 const blockchain = new Blockchain();
 const transactionPool = new TransactionPool();
