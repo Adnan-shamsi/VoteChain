@@ -5,12 +5,13 @@ class TransactionPool {
     this.transactions = {
       votingTransactions: {},
       newCommerTransactions: {},
+      newCommerSignature: ''
     };
 
     this.questionMap = {};
   }
 
-  clear(){
+  clear() {
     this.transactions = {
       votingTransactions: {},
       newCommerTransactions: {},
@@ -22,15 +23,16 @@ class TransactionPool {
   setVotingTransaction(transaction) {
     this.transactions.votingTransactions[transaction.id] = transaction;
   }
-  
+
   setQuestion(questionData) {
     //questionData obj {question:'dadasd',choices:['yes','no']}
     this.questionMap = questionData;
   }
-  
-  setNewCommerTransaction(newCommerTransaction){
+
+  setNewCommerTransaction({ transaction, signature }) {
     //newCommerTransaction obj [{'sender_address','address', 'id' aka timestamp, 'signature assigned by central server'}]
-    this.transactions.newCommerTransactions[newCommerTransaction.id] = newCommerTransaction;
+    this.transactions.newCommerTransactions[transaction.id] = transaction;
+    this.transactions.newCommerSignature = signature
   }
   
   setMap({transactions, questionMap}) {
@@ -46,10 +48,10 @@ class TransactionPool {
       (transaction) => transaction.input.address === inputAddress
     );
   }
-  
+
   existingNewCommerTransaction({ inputAddress }) {
     const transactions = Object.values(this.transactions.newCommerTransactions);
-    
+
     return transactions.find(
       (transaction) => transaction.input.address === inputAddress
     );
