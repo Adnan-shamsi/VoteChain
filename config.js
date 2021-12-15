@@ -10,10 +10,10 @@ const GENESIS_DATA = {
 	data: []
 };
 
-const STARTING_BALANCE = 0;
+const STARTING_BALANCE = 1;
 
 const REWARD_INPUT_ALLOCATOR = { address: '*miner-reward*' };
-const WINNER_INPUT_ALLOCATOR = { address: '*authorized-reward*' };
+const WINNER_INPUT_ALLOCATOR = { address: '*winner-reward*' };
 const VERIFICATION_INPUT_ALLOCATOR = { address: '*verification-reward*' };
 
 const MINING_REWARD = 2;

@@ -107,6 +107,13 @@ router.get("/transaction-pool-map", (req, res) => {
 });
 
 router.get('/mine-transactions', (req, res) => {
+	
+	if ( Object.keys(transactionPool.questionMap) == 0) {
+		return res
+			.status(400)
+			.json({ type: "error", message: "no poll record" });
+	}
+	
 	transactionMiner.mineTransactions();
 
 	res.redirect('/api/blocks');

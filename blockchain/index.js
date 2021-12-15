@@ -2,7 +2,7 @@ const Block = require("./block");
 const Transaction = require("../wallet/transaction");
 const Wallet = require("../wallet");
 const { cryptoHash } = require("../util");
-const { REWARD_INPUT_ALLOCATOR, MINING_REWARD } = require("../config");
+const { REWARD_INPUT_ALLOCATOR, MINING_REWARD,STARTING_BALANCE } = require("../config");
 
 class Blockchain {
 	constructor() {
@@ -57,6 +57,10 @@ class Blockchain {
 			const winners = [];
 			for (let transaction of votingTransactions) {
 				const addressOfVoter = transaction.input.address;
+
+				if (!currentBalance[addressOfVoter]) {
+					currentBalance[addressOfVoter] = STARTING_BALANCE;
+				}
 
 				if (votingTransactionSet.has(addressOfVoter)) {
 					console.error(
