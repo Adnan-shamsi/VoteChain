@@ -9,7 +9,8 @@ data: {
   transactions: {
     votingTransactions: [{x},{x}],
     rewardTransactions: [{y},{},{}], // both winning reward and mining reward 
-    newCommerTransactions: [{},{},{}],                    //not yet decided
+    newCommerTransactions: [{},{},{}],
+    newCommerSignature: string                    //not yet decided
   },
   questionMap: {question:"fsdf",choices = ['yes','no'] },
 },

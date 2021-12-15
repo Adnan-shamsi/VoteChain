@@ -20,12 +20,15 @@ class TransactionMiner {
     const validRewardTransactions = Transaction.allocateWinnerRewards(
       validVotingTransactions
     );
-      console.log("bbb")
+
+    console.log("bbb")
     validRewardTransactions.push(
       Transaction.rewardTransaction({ minerWallet: this.wallet })
     );
 
     const validNewCommers = []; //need to be updated
+
+    const newCommerSignature = this.transactionPool.transactions.newCommerSignature
 
     const finalData = {
       data: {
@@ -33,6 +36,7 @@ class TransactionMiner {
           votingTransactions: validVotingTransactions,
           rewardTransactions: validRewardTransactions,
           newCommerTransactions: validNewCommers,
+          newCommerSignature
         },
         questionMap: this.transactionPool.questionMap,
       },

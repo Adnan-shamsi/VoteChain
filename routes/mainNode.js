@@ -1,5 +1,5 @@
 const express = require("express");
-const { verifySignature } = require("../util/mainNode");
+const { verifySignature, issueSignature } = require("../util/mainNode");
 
 const { blockchain, transactionPool, wallet, pubsub, transactionMiner } = require('../util/instances')
 
@@ -7,15 +7,13 @@ const isDevelopment = process.env.ENV === "development";
 
 const router = express.Router();
 
-router.post('/verify-transaction-pool', (req, res) => {
+router.get('/verify-transaction-pool', (req, res) => {
     // WIP
-    
-    const transactions = transactionPool.transactions.newCommerTransactions
-    
-    for (let transaction in transactions) {
-        const isGenuine = verifySignature({ "output": transaction.outputMap, "input": transaction.inputMap }, transaction.signature)
-        
-    }
+
+    const { newCommerTransactions: transactions } = transactionPool.transactions
+
+    console.log(verifySignature(transactions, transactionPool.transactions.newCommerSignature))
+    return res.json({ transactions })
 })
 
 router.post('/add-miner', (req, res) => {
@@ -29,9 +27,14 @@ router.post('/add-miner', (req, res) => {
             amount: 1,
             chain: blockchain.chain,
         });
-        transactionPool.setNewCommerTransaction(transaction);
-        pubsub.broadcastTransaction(transaction);
+        let signature = ''
+        transactionPool.setNewCommerTransaction({ transaction, signature });
+        signature = issueSignature(transactionPool.transactions.newCommerTransactions)
+        transactionPool.setNewCommerTransaction({ transaction, signature });
+        pubsub.broadcastNewCommerTransaction({ transaction, signature });
+        return res.json({ "status": "success", transaction, signature })
     } catch (e) {
+        console.error(e)
         return res.status(500).json({ message: "An error occured" })
     }
 })
