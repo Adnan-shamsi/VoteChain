@@ -1,3 +1,4 @@
+const { verifySignature } = require("../util");
 const Transaction = require("./transaction");
 
 class TransactionPool {
@@ -5,7 +6,6 @@ class TransactionPool {
     this.transactions = {
       votingTransactions: {},
       newCommerTransactions: {},
-      newCommerSignature: ''
     };
 
     this.questionMap = {};
@@ -29,13 +29,12 @@ class TransactionPool {
     this.questionMap = questionData;
   }
 
-  setNewCommerTransaction({ transaction, signature }) {
+  setNewCommerTransaction({ newCommer, signature }) {
     //newCommerTransaction obj [{'sender_address','address', 'id' aka timestamp, 'signature assigned by central server'}]
-    this.transactions.newCommerTransactions[transaction.id] = transaction;
-    this.transactions.newCommerSignature = signature
+    this.transactions.newCommerTransactions[newCommer] = signature;
   }
-  
-  setMap({transactions, questionMap}) {
+
+  setMap({ transactions, questionMap }) {
     //console.log(transactions, questionMap)
     this.transactions = transactions;
     this.questionMap = questionMap;
@@ -58,15 +57,20 @@ class TransactionPool {
   }
 
   validVotingTransactions() {
-    return Object.values(this.transactions.votingTransactions).filter((transaction) =>
-      Transaction.validVotingTransaction(transaction)
+    return Object.values(this.transactions.votingTransactions).filter(
+      (transaction) => Transaction.validVotingTransaction(transaction)
     );
   }
 
-  validnewCommerTransactions() {
-    return Object.values(this.transactions.newCommerTransactions).filter((transaction) =>
-      Transaction.validNewCommerTransaction(transaction)
-    );
+  validNewCommerTransactions() {
+    return Object.keys(this.transactions.newCommerTransactions)
+      .map((key) => [key, this.transactions.newCommerTransactions[key]])
+      .filter((x) =>
+        Transaction.validNewCommerTransaction(
+          x[0],
+          x[1]
+        )
+      );
   }
 
   clearBlockchainTransactions({ chain }) {

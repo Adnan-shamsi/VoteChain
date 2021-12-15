@@ -57,8 +57,8 @@ class PubSub {
 				break;
 			case CHANNELS.NEW_COMMER_TRANSACTION:
 				this.transactionPool.setNewCommerTransaction({
-					transaction: parsedMessage?.transaction,
-					signature: parsedMessage?.signature
+					newCommer: parsedMessage.newCommer,
+					signature: parsedMessage.signature
 				})
 			default:
 				return;
@@ -93,10 +93,10 @@ class PubSub {
 		});
 	}
 
-	broadcastNewCommerTransaction({ transaction, signature }) {
+	broadcastNewCommerTransaction({ newCommer, signature }) {
 		this.publish({
 			channel: CHANNELS.NEW_COMMER_TRANSACTION,
-			message: JSON.stringify({ transaction, signature })
+			message: JSON.stringify({ newCommer, signature })
 		});
 	}
 

@@ -1,5 +1,6 @@
 const { v1: uuid } = require("uuid");
 const { verifySignature, cryptoHash } = require("../util");
+const {verifyNewCommerSignature, issueNewCommerSignature} = require('../util/mainNode')
 const {
   REWARD_INPUT_ALLOCATOR,
   MINING_REWARD,
@@ -35,6 +36,10 @@ class Transaction {
       address: senderWallet.publicKey,
       signature: senderWallet.sign(outputMap),
     };
+  }
+  
+  static validNewCommerTransaction(key, signature){
+    return verifyNewCommerSignature(key, signature)
   }
 
   static validVotingTransaction(transaction) {

@@ -11,7 +11,7 @@ const GENESIS_DATA = {
 };
 
 const STARTING_BALANCE = 1;
-
+const NEW_COMMER_BALANCE = 1;
 const REWARD_INPUT_ALLOCATOR = { address: '*miner-reward*' };
 const WINNER_INPUT_ALLOCATOR = { address: '*winner-reward*' };
 const VERIFICATION_INPUT_ALLOCATOR = { address: '*verification-reward*' };
@@ -28,5 +28,6 @@ module.exports = {
 	MINING_REWARD,
 	WINNER_INPUT_ALLOCATOR,
 	VERIFICATION_INPUT_ALLOCATOR,
-	MAIN_NODE_LOCATION
+	MAIN_NODE_LOCATION,
+	NEW_COMMER_BALANCE,
 };
