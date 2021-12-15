@@ -10,7 +10,7 @@ const GENESIS_DATA = {
 	data: []
 };
 
-const STARTING_BALANCE = 1;
+const STARTING_BALANCE = 0;
 
 const REWARD_INPUT_ALLOCATOR = { address: '*miner-reward*' };
 const WINNER_INPUT_ALLOCATOR = { address: '*authorized-reward*' };

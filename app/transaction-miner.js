@@ -20,7 +20,9 @@ class TransactionMiner {
     const validRewardTransactions = Transaction.allocateWinnerRewards(
       validVotingTransactions
     );
-      console.log("bbb")
+    
+    console.log("validRewardTransactions",validRewardTransactions);
+    
     validRewardTransactions.push(
       Transaction.rewardTransaction({ minerWallet: this.wallet })
     );

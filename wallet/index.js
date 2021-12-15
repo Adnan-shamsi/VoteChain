@@ -35,8 +35,8 @@ class Wallet {
     let outputsTotal = 0;
 
     for (let i = chain.length - 1; i > 0; i--) {
-      const { votingTransaction, rewardTransactions } = chain[i].transactions;
-
+      const { votingTransactions, rewardTransactions } = chain[i].data.transactions;
+      //console.log(votingTransaction,rewardTransactions);
       for (let transaction of rewardTransactions) {
         const addressOutput = transaction.outputMap[address];
         if (addressOutput) {
@@ -51,7 +51,7 @@ class Wallet {
       //   }
       // }
 
-      for (let transaction of votingTransaction) {
+      for (let transaction of votingTransactions) {
         if (transaction.input.address === address) {
           hasConductedTransaction = true;
         }

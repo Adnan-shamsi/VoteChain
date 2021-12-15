@@ -62,17 +62,18 @@ class Transaction {
 
   static validateWinnerTransactions({ votingTransactions, winners }) {
     const expectedWinners = this.allocateWinnerRewards(votingTransactions);
-
+    
     if (cryptoHash(expectedWinners) !== cryptoHash(winners)) {
       return false;
     }
+    return true;
   }
 
   static allocateWinnerRewards(validVotingTransactions) {
     //allocating rewards
     //who all won
     //if tie allocate to all of them
-
+    console.log("validVotingTransactions->",validVotingTransactions);
     const countFrequencies = {};
     let mx = 0;
 
@@ -132,14 +133,15 @@ class Transaction {
   }
 
   static rewardTransaction({ minerWallet }) {
-    return new this({
+    return ({
       input: REWARD_INPUT_ALLOCATOR,
       outputMap: { [minerWallet.publicKey]: MINING_REWARD },
     });
   }
 
   static winnerTransaction({ winnerWallet, award }) {
-    return new this({
+    console.log("winnerWallet->",winnerWallet)
+    return ({
       input: WINNER_INPUT_ALLOCATOR,
       outputMap: { [winnerWallet]: 1 + award },
     });

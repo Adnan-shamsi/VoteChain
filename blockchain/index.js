@@ -67,7 +67,7 @@ class Blockchain {
 					votingTransactionSet.add(addressOfVoter);
 				}
 
-				if (!currentBalance[addressOfVoter] && false) {
+				if (!currentBalance[addressOfVoter]) {
 					console.error("InSufficient Transaction");
 					return false;
 				} else if (currentBalance[addressOfVoter] !== transaction.input.amount && false) {
@@ -112,7 +112,8 @@ class Blockchain {
 					winners.push(transaction);
 				}
 			}
-
+			
+			
 			if (!Transaction.validateWinnerTransactions({ votingTransactions, winners })) {
 				console.error("Winners data missMatch");
 				return false;
@@ -130,6 +131,7 @@ class Blockchain {
 				}
 			}
 		}
+		return true;
 	}
 
 	static isValidChain(chain) {

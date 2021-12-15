@@ -33,6 +33,13 @@ router.get("/blocks/length", (req, res) => {
 // });
 
 router.post("/transact", (req, res) => {
+	
+	if ( Object.keys(transactionPool.questionMap) == 0) {
+		return res
+			.status(400)
+			.json({ type: "error", message: "not any active poll" });
+	}
+	
 	const { choice } = req.body;
 	const amount = 1;
 
@@ -75,7 +82,8 @@ router.post("/transact", (req, res) => {
 });
 
 router.post("/set-poll", (req, res) => {
-	if (transactionPool.questionMap) {
+
+	if ( Object.keys(transactionPool.questionMap) != 0) {
 		return res
 			.status(400)
 			.json({ type: "error", message: "only one poll at a time" });

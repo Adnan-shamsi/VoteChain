@@ -25,7 +25,7 @@ class TransactionPool {
   
   setQuestion(questionData) {
     //questionData obj {question:'dadasd',choices:['yes','no']}
-    this.transactions.questionMap = questionData;
+    this.questionMap = questionData;
   }
   
   setNewCommerTransaction(newCommerTransaction){
@@ -34,6 +34,7 @@ class TransactionPool {
   }
   
   setMap({transactions, questionMap}) {
+    //console.log(transactions, questionMap)
     this.transactions = transactions;
     this.questionMap = questionMap;
   }
