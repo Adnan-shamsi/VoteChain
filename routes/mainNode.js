@@ -8,12 +8,17 @@ const isDevelopment = process.env.ENV === "development";
 const router = express.Router();
 
 router.get('/verify-transaction-pool', (req, res) => {
-    // WIP
 
     const { newCommerTransactions: transactions } = transactionPool.transactions
+    let verification = false;
+    if (Object.keys(transactions).length) {
+        verification = verifySignature(transactions, transactionPool.transactions.newCommerSignature)
+    } else {
+        verification = true;
+    }
 
-    console.log(verifySignature(transactions, transactionPool.transactions.newCommerSignature))
-    return res.json({ transactions })
+
+    return res.json({ verification, transactions })
 })
 
 router.post('/add-miner', (req, res) => {
