@@ -1,5 +1,5 @@
 const Transaction = require("./transaction");
-const { STARTING_BALANCE } = require("../config");
+const { STARTING_BALANCE, NEW_COMMER_BALANCE } = require("../config");
 const { ec, cryptoHash } = require("../util");
 
 class Wallet {
@@ -37,7 +37,7 @@ class Wallet {
     let outputsTotal = 0;
 
     for (let i = chain.length - 1; i > 0; i--) {
-      const { votingTransactions, rewardTransactions } = chain[i].data.transactions;
+      const { votingTransactions, rewardTransactions, newCommerTransactions } = chain[i].data.transactions;
       //console.log(votingTransaction,rewardTransactions);
       for (let transaction of rewardTransactions) {
         const addressOutput = transaction.outputMap[address];
@@ -46,12 +46,11 @@ class Wallet {
         }
       }
       
-      // for(let transaction of newCommerTransactions){
-      //   const addressOutput = transaction.outputMap[address];
-      //   if (addressOutput) {
-      //     outputsTotal = outputsTotal + addressOutput;
-      //   }
-      // }
+      for(let transaction of newCommerTransactions){
+        if (transaction[0] == address) {
+          outputsTotal = outputsTotal + NEW_COMMER_BALANCE;
+        }
+      }
 
       for (let transaction of votingTransactions) {
         if (transaction.input.address === address) {
