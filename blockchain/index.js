@@ -5,167 +5,160 @@ const { cryptoHash } = require("../util");
 const { REWARD_INPUT_ALLOCATOR, MINING_REWARD } = require("../config");
 
 class Blockchain {
-  constructor() {
-    this.chain = [Block.genesis()];
-  }
+	constructor() {
+		this.chain = [Block.genesis()];
+	}
 
-  addBlock({ data }) {
-    const newBlock = Block.mineBlock({
-      lastBlock: this.chain[this.chain.length - 1],
-      data,
-    });
+	addBlock({ data }) {
+		const newBlock = Block.mineBlock({
+			lastBlock: this.chain[this.chain.length - 1],
+			data,
+		});
 
-    this.chain.push(newBlock);
-  }
+		this.chain.push(newBlock);
+	}
 
-  replaceChain(chain, validateTransactions, onSuccess) {
-    if (chain.length <= this.chain.length) {
-      console.error("The incoming chain must be longer");
-      return;
-    }
+	replaceChain(chain, validateTransactions, onSuccess) {
+		if (chain.length <= this.chain.length) {
+			console.error("The incoming chain must be longer");
+			return;
+		}
 
-    if (!Blockchain.isValidChain(chain)) {
-      console.error("The incoming chain must be valid");
-      return;
-    }
+		if (!Blockchain.isValidChain(chain)) {
+			console.error("The incoming chain must be valid");
+			return;
+		}
 
-    if (validateTransactions && !this.validTransactionData({ chain })) {
-      console.error("The incoming chain has invalid data");
-      return;
-    }
+		if (validateTransactions && !Blockchain.validTransactionData({ chain })) {
+			console.error("The incoming chain has invalid data");
+			return;
+		}
 
-    if (onSuccess) onSuccess();
-    console.log("replacing chain with", chain);
-    this.chain = chain;
-  }
+		if (onSuccess) onSuccess();
+		console.log("replacing chain with", chain);
+		this.chain = chain;
+	}
 
-  static validTransactionData({ chain }) {
-    // incomplete
-    // validateNewCommerSignatures
-    
-    const newCommerSet = new Set();
-    const currentBalance = {};
+	static validTransactionData({ chain }) {
+		// incomplete
+		// validateNewCommerSignatures
 
-    for (let i = 1; i < chain.length; i++) {
-      const { votingTransactions, rewardTransactions, newCommerTransactions } =
-        chain[i].data;
+		const newCommerSet = new Set();
+		const currentBalance = {};
 
-      const votingTransactionSet = new Set();
+		for (let i = 1; i < chain.length; i++) {
+			const { votingTransactions, rewardTransactions, newCommerTransactions } =
+				chain[i].data.transactions;
 
-      let rewardTransactionCount = 0;
+			const votingTransactionSet = new Set();
 
-      const winners = [];
+			let rewardTransactionCount = 0;
 
-      for (let transaction of votingTransactions) {
-        const addressOfVoter = transaction.input.address;
+			const winners = [];
+			for (let transaction of votingTransactions) {
+				const addressOfVoter = transaction.input.address;
 
-        if (votingTransactionSet.has(addressOfVoter)) {
-          console.error(
-            "An identical transaction appears more than once in the block"
-          );
-          return false;
-        } else {
-          votingTransactionSet.add(addressOfVoter);
-        }
+				if (votingTransactionSet.has(addressOfVoter)) {
+					console.error(
+						"An identical transaction appears more than once in the block"
+					);
+					return false;
+				} else {
+					votingTransactionSet.add(addressOfVoter);
+				}
 
-        if (!currentBalance[addressOfVoter]) {
-          console.error("InSufficient Transaction");
-          return false;
-        } else if (
-          currentBalance[addressOfVoter] !== transaction.input.amount
-        ) {
-          console.error("Miss Match amount");
-          return false;
-        } else if (
-          transaction.outputMap[addressOfVoter] + 1 !==
-          currentBalance[addressOfVoter]
-        ) {
-          console.error("Amount is not 1");
-          return false;
-        } else {
-          currentBalance[addressOfVoter] =
-            transaction.outputMap[addressOfVoter];
-        }
-      }
+				if (!currentBalance[addressOfVoter] && false) {
+					console.error("InSufficient Transaction");
+					return false;
+				} else if (currentBalance[addressOfVoter] !== transaction.input.amount && false) {
+					console.error("Miss Match amount");
+					return false;
+				} else if (transaction.outputMap[addressOfVoter] + 1 !== currentBalance[addressOfVoter] && false) {
+					console.error("Amount is not 1");
+					return false;
+				} else {
+					currentBalance[addressOfVoter] = transaction.outputMap[addressOfVoter];
+				}
+			}
 
-      for (let transaction of rewardTransactions) {
-        if (transaction.input.address === REWARD_INPUT_ALLOCATOR.address) {
-          rewardTransactionCount += 1;
-          const recipient = Object.keys(transaction.outputMap)[0];
+			for (let transaction of rewardTransactions) {
+				if (transaction.input.address === REWARD_INPUT_ALLOCATOR.address) {
+					rewardTransactionCount += 1;
+					const recipient = Object.keys(transaction.outputMap)[0];
 
-          if (currentBalance[recipient])
-            currentBalance[recipient] += MINING_REWARD;
-          else {
-            currentBalance[recipient] = MINING_REWARD;
-          }
+					if (currentBalance[recipient])
+						currentBalance[recipient] += MINING_REWARD;
+					else {
+						currentBalance[recipient] = MINING_REWARD;
+					}
 
-          if (rewardTransactionCount > 1) {
-            console.error("Miner rewards exceed limit");
-            return false;
-          }
+					if (rewardTransactionCount > 1) {
+						console.error("Miner rewards exceed limit");
+						return false;
+					}
 
-          if (transaction.outputMap[recipient] !== MINING_REWARD) {
-            console.error("Miner reward amount is invalid");
-            return false;
-          }
-        } else {
-          const recipient = Object.keys(transaction.outputMap)[0];
+					if (transaction.outputMap[recipient] !== MINING_REWARD) {
+						console.error("Miner reward amount is invalid");
+						return false;
+					}
+				} else {
+					const recipient = Object.keys(transaction.outputMap)[0];
 
-          if (currentBalance[recipient])
-            currentBalance[recipient] += transaction.outputMap[recipient];
-          else {
-            currentBalance[recipient] = transaction.outputMap[recipient];
-          }
-          winners.push(transaction);
-        }
-      }
+					if (currentBalance[recipient])
+						currentBalance[recipient] += transaction.outputMap[recipient];
+					else {
+						currentBalance[recipient] = transaction.outputMap[recipient];
+					}
+					winners.push(transaction);
+				}
+			}
 
-      if (!validateWinnerTransactions({ votingTransactions, winners })) {
-        console.error("Winners data missMatch");
-        return false;
-      }
+			if (!Transaction.validateWinnerTransactions({ votingTransactions, winners })) {
+				console.error("Winners data missMatch");
+				return false;
+			}
 
-      for (let transaction of newCommerTransactions) {
-        //const addressOfNewCommer = ....
-        if (newCommerSet.has(addressOfNewCommer)) {
-          console.error(
-            "An identical transaction appears more than once in the block"
-          );
-          return false;
-        } else {
-          newCommer.add(addressOfNewCommer);
-        }
-      }
-    }
-  }
+			for (let transaction of newCommerTransactions) {
+				//const addressOfNewCommer = ....
+				if (newCommerSet.has(addressOfNewCommer)) {
+					console.error(
+						"An identical transaction appears more than once in the block"
+					);
+					return false;
+				} else {
+					newCommer.add(addressOfNewCommer);
+				}
+			}
+		}
+	}
 
-  static isValidChain(chain) {
-    if (JSON.stringify(chain[0]) !== JSON.stringify(Block.genesis())) {
-      return false;
-    }
+	static isValidChain(chain) {
+		if (JSON.stringify(chain[0]) !== JSON.stringify(Block.genesis())) {
+			return false;
+		}
 
-    for (let i = 1; i < chain.length; i++) {
-      const { timestamp, lastHash, hash, nonce, difficulty, data } = chain[i];
-      const actualLastHash = chain[i - 1].hash;
-      const lastDifficulty = chain[i - 1].difficulty;
+		for (let i = 1; i < chain.length; i++) {
+			const { timestamp, lastHash, hash, nonce, difficulty, data } = chain[i];
+			const actualLastHash = chain[i - 1].hash;
+			const lastDifficulty = chain[i - 1].difficulty;
 
-      if (lastHash !== actualLastHash) return false;
+			if (lastHash !== actualLastHash) return false;
 
-      const validatedHash = cryptoHash(
-        timestamp,
-        lastHash,
-        data,
-        nonce,
-        difficulty
-      );
+			const validatedHash = cryptoHash(
+				timestamp,
+				lastHash,
+				data,
+				nonce,
+				difficulty
+			);
 
-      if (hash !== validatedHash) return false;
+			if (hash !== validatedHash) return false;
 
-      if (Math.abs(lastDifficulty - difficulty) > 1) return false;
-    }
+			if (Math.abs(lastDifficulty - difficulty) > 1) return false;
+		}
 
-    return true;
-  }
+		return true;
+	}
 }
 
 module.exports = Blockchain;

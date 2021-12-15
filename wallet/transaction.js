@@ -14,6 +14,9 @@ class Transaction {
   }
 
   createOutputMap({ senderWallet, recipient, amount }) {
+    if (!senderWallet || !recipient || !amount) {
+      return {}
+    }
     const outputMap = {};
 
     outputMap[recipient] = amount;
@@ -23,6 +26,9 @@ class Transaction {
   }
 
   createInput({ senderWallet, outputMap }) {
+    if (!senderWallet) {
+      return {}
+    }
     return {
       timestamp: Date.now(),
       amount: senderWallet.balance,
@@ -104,7 +110,7 @@ class Transaction {
 
     let award = total_loss / total_won;
 
-    award = Math.round(num * 1000) / 1000;
+    award = Math.round(award * 1000) / 1000;
 
     for (let transaction of validVotingTransactions) {
       const choice = Object.keys(transaction.outputMap).filter(
@@ -112,6 +118,7 @@ class Transaction {
       )[0];
 
       if (optionWon.includes(choice)) {
+        console.log("aaa")
         rewardTransaction.push(
           Transaction.winnerTransaction({
             winnerWallet: transaction.input.address,
@@ -134,7 +141,7 @@ class Transaction {
   static winnerTransaction({ winnerWallet, award }) {
     return new this({
       input: WINNER_INPUT_ALLOCATOR,
-      outputMap: { [winnerWallet.publicKey]: 1 + award },
+      outputMap: { [winnerWallet]: 1 + award },
     });
   }
 }
