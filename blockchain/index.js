@@ -93,7 +93,7 @@ class Blockchain {
 					if (currentBalance[recipient])
 						currentBalance[recipient] += MINING_REWARD;
 					else {
-						currentBalance[recipient] = MINING_REWARD;
+						currentBalance[recipient] = MINING_REWARD + STARTING_BALANCE;
 					}
 
 					if (rewardTransactionCount > 1) {
