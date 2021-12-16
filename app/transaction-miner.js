@@ -1,6 +1,5 @@
 const { request } = require("express");
 const Transaction = require("../wallet/transaction");
-const { verifyNewCommerSignature } = require("../util/mainNode");
 
 class TransactionMiner {
   constructor({ blockchain, transactionPool, wallet, pubsub }) {
@@ -11,9 +10,6 @@ class TransactionMiner {
   }
 
   mineTransactions() {
-    if (!this.transactionPool.questionMap) {
-      return console.error("no Block to be Mined!!");
-    }
 
     const validVotingTransactions =
       this.transactionPool.validVotingTransactions();

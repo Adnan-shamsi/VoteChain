@@ -32,6 +32,15 @@ router.get("/blocks/length", (req, res) => {
 //   res.json(blocksReversed.slice(startIndex, endIndex));
 // });
 
+router.get("/get-public-key", (req, res) => {
+	res.json({address: wallet.publicKey});
+});
+
+router.get("/get-current-polling", (req, res) => {
+	res.json(transactionPool.questionMap);
+});
+
+
 router.post("/transact", (req, res) => {
 	
 	if ( Object.keys(transactionPool.questionMap) == 0) {
