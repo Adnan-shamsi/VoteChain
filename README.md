@@ -12,7 +12,7 @@
 - Polling
 - Add new legit Voters 
 - Cast your votes 
-- Winners will get some extra voting points and losers will lose some points 
+- Winners of the poll will get some extra voting points and losers will lose some points 
 
 ## 🔥 Getting Started
 
