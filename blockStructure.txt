@@ -9,8 +9,7 @@ data: {
   transactions: {
     votingTransactions: [{x},{x}],
     rewardTransactions: [{y},{},{}], // both winning reward and mining reward 
-    newCommerTransactions: [{},{},{}],
-    newCommerSignature: string                    //not yet decided
+    newCommerTransactions: [[k],[],[]],
   },
   questionMap: {question:"fsdf",choices = ['yes','no'] },
 },
@@ -35,3 +34,5 @@ x = {
 
 
 y = { input:{address}, outputMap}
+
+k = [publicKeyOfNewCommer, signature]    //signature is issued by passing issueNewCommerSignature(publicKeyOfNewCommer);
