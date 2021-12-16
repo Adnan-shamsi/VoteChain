@@ -5,7 +5,7 @@
 
 # 🔖 About
 ## A decentralized voting system using blockchain technology
-- Mining using Proof Of Stake 
+- Mining using Proof Of Work
 - Synchronization using redis pub/sub
 
 ## 🚀 Features
