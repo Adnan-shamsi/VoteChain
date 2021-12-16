@@ -36,4 +36,4 @@
 ```
 
 ## 🚀 Extra
--- To view our mine chain demo [click](DemoChain.json)
+-- To view our sample mine chain [click :chains: ](DemoChain.json)
