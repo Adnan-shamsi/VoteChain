@@ -3,6 +3,28 @@
      style="border-radius:50%"/>
 </p>
 
+<img src="./media/image1.png" height="100" />
+
+<table >
+   <tr>
+     <td>
+        <img src="./media/image2.png"/>
+     </td>
+     <td >
+       <img src="./media/image3.png"/>
+     </td>
+   </tr>
+   <tr>
+     <td>
+       <img src="./media/image4.png" />
+     </td>
+     <td>
+       <img src="./media/image6.png" />
+     </td>
+   </tr>
+</table>
+
+
 # 🔖 About
 ## A decentralized voting system using blockchain technology
 - Mining using Proof Of Work
