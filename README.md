@@ -3,15 +3,20 @@
      style="border-radius:50%"/>
 </p>
 
-<img src="./media/image1.png" height="80%"/>
-
+<div align="center">
+<img src="./media/image1.png" height="300"  />
+</div>
+ 
+ <br/>
+ <br/>
+ 
 <table >
    <tr>
      <td>
-        <img src="./media/image2.png"/>
+        <img src="./media/image2.png" />
      </td>
      <td >
-       <img src="./media/image3.png"/>
+       <img src="./media/image3.png" />
      </td>
    </tr>
    <tr>
