@@ -1,5 +1,5 @@
 <p align="center">
-<img src="https://i.ibb.co/5hLWcBp/cooltext400209335338159.png" height="100"
+<img src="./media/voteChain.png" height="100"
      style="border-radius:50%"/>
 </p>
 
