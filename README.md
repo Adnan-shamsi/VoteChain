@@ -35,3 +35,5 @@
    $ npm run dev-peer         # starting other random nodes
 ```
 
+## 🚀 Extra
+- [view our sample mine chain  :chains: ](DemoChain.json)
