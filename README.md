@@ -1,11 +1,38 @@
 <p align="center">
-<img src="https://i.ibb.co/5hLWcBp/cooltext400209335338159.png" height="100"
+<img src="./media/voteChain.png" height="100"
      style="border-radius:50%"/>
 </p>
 
+<div align="center">
+<img src="./media/image1.png" height="300"  />
+</div>
+ 
+ <br/>
+ <br/>
+ 
+<table >
+   <tr>
+     <td>
+        <img src="./media/image2.png" />
+     </td>
+   </tr>
+   <tr>
+     <td>
+       <img src="./media/image4.png" />
+     </td>
+   </tr>
+     <tr>
+     <td>
+       <img src="./media/image6.png" />
+     </td>
+   </tr>
+   
+</table>
+
+
 # 🔖 About
 ## A decentralized voting system using blockchain technology
-- Mining using Proof Of Stake 
+- Mining using Proof Of Work
 - Synchronization using redis pub/sub
 
 ## 🚀 Features
@@ -35,3 +62,5 @@
    $ npm run dev-peer         # starting other random nodes
 ```
 
+## 🚀 Extra
+- [view our sample mine chain  :chains: ](DemoChain.json)

@@ -14,7 +14,7 @@ router.get("/blocks", (req, res) => {
 });
 
 router.get("/blocks/length", (req, res) => {
-	res.json(blockchain.chain.length);
+	res.json({length:blockchain.chain.length});
 });
 
 // app.get('/api/blocks/:id', (req, res) => {

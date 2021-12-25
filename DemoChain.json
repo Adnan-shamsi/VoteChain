@@ -1,0 +1,279 @@
+[
+    {
+        "timestamp": 1,
+        "lastHash": "-----",
+        "hash": "hash-one",
+        "data": [],
+        "nonce": 0,
+        "difficulty": 3
+    },
+    {
+        "timestamp": 1639639057287,
+        "lastHash": "hash-one",
+        "hash": "3c5b9f875829f45652d1f78c403a35c7c5abe3ce98c4a2b16d0deeaf68ad9438",
+        "data": {
+            "transactions": {
+                "votingTransactions": [],
+                "rewardTransactions": [
+                    {
+                        "input": {
+                            "address": "*miner-reward*"
+                        },
+                        "outputMap": {
+                            "042b129cb7a86fa2c72852300405e2fdaa686d1d995057ee2cc4326bdcaf563a52bd21d869451476e3c740d5d2737aa2d636ffd4f2068a0ddbb030d79e7d274a61": 2
+                        }
+                    }
+                ],
+                "newCommerTransactions": [
+                    [
+                        "0403693c8ef676422ee8abd3249589ecf7bf45bad523796270a4b52d4a1ee74584dca69121f54c31e5369c855fe48d0d1feebbbd0973bad649a49921e42906a137",
+                        "50be963e6fbb7534c2d46e5bb8c9a43de4f81e2866ad43cbc8384aee65303088ac2b10298263e7cf2ce4dd57f8917d1d3870f7a92d2c1b49b91f7ff36de61b781db13f38de3f9b558a607d82a8b53d9443d4ca27e6deac3bd3280c476559352912550cbfe60855787f29790df7ea8d0196db985e39a2298c06a3bb4046251a56"
+                    ],
+                    [
+                        "0479262798f618426065cdcbaddaf4bcfeb44f0db45a0cc2334bddaa5d3bb4ef6f402423424d1c449307b7006ff28d20dd781c0b18634fcb58d53042b48b662a3a",
+                        "0e62fc27317b50da6dcc5c9468e244e281460e6d160a5f553d418176d5ab25ab2f2ccb80ecb8bf688aa9131b134d2b96cac6f602b2aa2c467b44c5e0bffd02994a3818a41e00bd6e248a4219885ddd10bee5f8510cbf97486ea143ef1cdc42c67f6a5dc80dd8f069fd86b629652c96cec679d6e5246799f429335f1b82928a32"
+                    ],
+                    [
+                        "0427eb4a1c6c022a6f563962ca418f0cdcd6302ef7fda9c5ca0d421ec4d6a5ddcce98f048002e8ad3d7bd88453d32c7f3fa9ad9f1c4c3fe88818edbbb25c8be3b4",
+                        "7f3ebbc4eef63c473cc4b003060b0f64740d98d82629c1db005a3d0e27ac83e80bd928f5d478f43423b4922ab7ea7c881323c9f6b5e15c96dcb264d545c745d2947c7f292c2f57ace3568a56bafe796688754db25fd046185cf2d4e71af80accf124fc674c337595623cf0055a6652876c4ac36527b165b82b67a65afcb826d9"
+                    ]
+                ]
+            },
+            "questionMap": {
+                "question": "fav color",
+                "choices": [
+                    "green",
+                    "blue"
+                ]
+            }
+        },
+        "nonce": 2,
+        "difficulty": 2
+    },
+    {
+        "timestamp": 1639639325640,
+        "lastHash": "3c5b9f875829f45652d1f78c403a35c7c5abe3ce98c4a2b16d0deeaf68ad9438",
+        "hash": "744ae1ffa6890501da83c2a2c5d42c110996bdfb6ec1d9d8734dcc1d4fc21acc",
+        "data": {
+            "transactions": {
+                "votingTransactions": [
+                    {
+                        "id": "a97f1a80-5e40-11ec-ae3b-97fcdb1e1dba",
+                        "outputMap": {
+                            "*option2*": 1,
+                            "042b129cb7a86fa2c72852300405e2fdaa686d1d995057ee2cc4326bdcaf563a52bd21d869451476e3c740d5d2737aa2d636ffd4f2068a0ddbb030d79e7d274a61": 1
+                        },
+                        "input": {
+                            "timestamp": 1639639235625,
+                            "amount": 2,
+                            "address": "042b129cb7a86fa2c72852300405e2fdaa686d1d995057ee2cc4326bdcaf563a52bd21d869451476e3c740d5d2737aa2d636ffd4f2068a0ddbb030d79e7d274a61",
+                            "signature": {
+                                "r": "86c63a0deeb7cf1006a45f7eed610c0f268cb2876daf4e0de7a9e6fe1e25eb77",
+                                "s": "a369c41cb0c3c90530a50279214dcb0a6faf209fb6de46cf36efecded3846dcc",
+                                "recoveryParam": 0
+                            }
+                        }
+                    },
+                    {
+                        "id": "b3f4b740-5e40-11ec-bd79-07f30a09434d",
+                        "outputMap": {
+                            "*option2*": 1,
+                            "0479262798f618426065cdcbaddaf4bcfeb44f0db45a0cc2334bddaa5d3bb4ef6f402423424d1c449307b7006ff28d20dd781c0b18634fcb58d53042b48b662a3a": 0
+                        },
+                        "input": {
+                            "timestamp": 1639639253172,
+                            "amount": 1,
+                            "address": "0479262798f618426065cdcbaddaf4bcfeb44f0db45a0cc2334bddaa5d3bb4ef6f402423424d1c449307b7006ff28d20dd781c0b18634fcb58d53042b48b662a3a",
+                            "signature": {
+                                "r": "440307be59998c7c11f9cc687511674c97d307acbc9cfcec80852ee3bd7cd42d",
+                                "s": "6a7891c69ff09aa85c75b8eb623c96a0d1268e2066b7983a9d925db3fc445b63",
+                                "recoveryParam": 0
+                            }
+                        }
+                    },
+                    {
+                        "id": "bb3fef10-5e40-11ec-bcea-1dcf59b0c523",
+                        "outputMap": {
+                            "*option2*": 1,
+                            "0403693c8ef676422ee8abd3249589ecf7bf45bad523796270a4b52d4a1ee74584dca69121f54c31e5369c855fe48d0d1feebbbd0973bad649a49921e42906a137": 0
+                        },
+                        "input": {
+                            "timestamp": 1639639265409,
+                            "amount": 1,
+                            "address": "0403693c8ef676422ee8abd3249589ecf7bf45bad523796270a4b52d4a1ee74584dca69121f54c31e5369c855fe48d0d1feebbbd0973bad649a49921e42906a137",
+                            "signature": {
+                                "r": "f0e3ffef8da2f30668c32a160ca86ce8ce236562a9769df669878d14bc47c71a",
+                                "s": "9004254b3f88fefe6cbb2049b899524ac5244d88bd4c7ea67948dab337d29493",
+                                "recoveryParam": 1
+                            }
+                        }
+                    },
+                    {
+                        "id": "d010e9d0-5e40-11ec-8315-8bd30b80e1ff",
+                        "outputMap": {
+                            "*option1*": 1,
+                            "0427eb4a1c6c022a6f563962ca418f0cdcd6302ef7fda9c5ca0d421ec4d6a5ddcce98f048002e8ad3d7bd88453d32c7f3fa9ad9f1c4c3fe88818edbbb25c8be3b4": 0
+                        },
+                        "input": {
+                            "timestamp": 1639639300334,
+                            "amount": 1,
+                            "address": "0427eb4a1c6c022a6f563962ca418f0cdcd6302ef7fda9c5ca0d421ec4d6a5ddcce98f048002e8ad3d7bd88453d32c7f3fa9ad9f1c4c3fe88818edbbb25c8be3b4",
+                            "signature": {
+                                "r": "da8eea1a3e94a03d9267b54065f5ded15913fde3d0560bbfe0989e34b8de3a14",
+                                "s": "7d96e6c2dbe14e8472b3b3d27059f89b79f323ea66b6c3a1be9cdb500a18661d",
+                                "recoveryParam": 1
+                            }
+                        }
+                    }
+                ],
+                "rewardTransactions": [
+                    {
+                        "input": {
+                            "address": "*winner-reward*"
+                        },
+                        "outputMap": {
+                            "042b129cb7a86fa2c72852300405e2fdaa686d1d995057ee2cc4326bdcaf563a52bd21d869451476e3c740d5d2737aa2d636ffd4f2068a0ddbb030d79e7d274a61": 1.333
+                        }
+                    },
+                    {
+                        "input": {
+                            "address": "*winner-reward*"
+                        },
+                        "outputMap": {
+                            "0479262798f618426065cdcbaddaf4bcfeb44f0db45a0cc2334bddaa5d3bb4ef6f402423424d1c449307b7006ff28d20dd781c0b18634fcb58d53042b48b662a3a": 1.333
+                        }
+                    },
+                    {
+                        "input": {
+                            "address": "*winner-reward*"
+                        },
+                        "outputMap": {
+                            "0403693c8ef676422ee8abd3249589ecf7bf45bad523796270a4b52d4a1ee74584dca69121f54c31e5369c855fe48d0d1feebbbd0973bad649a49921e42906a137": 1.333
+                        }
+                    },
+                    {
+                        "input": {
+                            "address": "*miner-reward*"
+                        },
+                        "outputMap": {
+                            "042b129cb7a86fa2c72852300405e2fdaa686d1d995057ee2cc4326bdcaf563a52bd21d869451476e3c740d5d2737aa2d636ffd4f2068a0ddbb030d79e7d274a61": 2
+                        }
+                    }
+                ],
+                "newCommerTransactions": []
+            },
+            "questionMap": {
+                "question": "favourite fruit",
+                "choices": [
+                    "mango",
+                    "apple"
+                ]
+            }
+        },
+        "nonce": 1,
+        "difficulty": 1
+    },
+    {
+        "timestamp": 1639639884996,
+        "lastHash": "744ae1ffa6890501da83c2a2c5d42c110996bdfb6ec1d9d8734dcc1d4fc21acc",
+        "hash": "f0f609227338f85feb1b052f9264d45395134e4da82790e1b385154104b873e8",
+        "data": {
+            "transactions": {
+                "votingTransactions": [
+                    {
+                        "id": "a1bfa7a0-5e41-11ec-bd79-07f30a09434d",
+                        "outputMap": {
+                            "*option1*": 1,
+                            "0479262798f618426065cdcbaddaf4bcfeb44f0db45a0cc2334bddaa5d3bb4ef6f402423424d1c449307b7006ff28d20dd781c0b18634fcb58d53042b48b662a3a": 0.33299999999999996
+                        },
+                        "input": {
+                            "timestamp": 1639639652122,
+                            "amount": 1.333,
+                            "address": "0479262798f618426065cdcbaddaf4bcfeb44f0db45a0cc2334bddaa5d3bb4ef6f402423424d1c449307b7006ff28d20dd781c0b18634fcb58d53042b48b662a3a",
+                            "signature": {
+                                "r": "daf378a288969f9a9f5d65f0567268795f54299eae0e84aff09fbf25e486fe64",
+                                "s": "e1f9c3111a5cb411c32d99f32c23dedc25c88fd401c63747d4097152793207d8",
+                                "recoveryParam": 1
+                            }
+                        }
+                    },
+                    {
+                        "id": "1ef52ec0-5e42-11ec-ae3b-97fcdb1e1dba",
+                        "outputMap": {
+                            "*option2*": 1,
+                            "042b129cb7a86fa2c72852300405e2fdaa686d1d995057ee2cc4326bdcaf563a52bd21d869451476e3c740d5d2737aa2d636ffd4f2068a0ddbb030d79e7d274a61": 3.333
+                        },
+                        "input": {
+                            "timestamp": 1639639862188,
+                            "amount": 4.333,
+                            "address": "042b129cb7a86fa2c72852300405e2fdaa686d1d995057ee2cc4326bdcaf563a52bd21d869451476e3c740d5d2737aa2d636ffd4f2068a0ddbb030d79e7d274a61",
+                            "signature": {
+                                "r": "a38babe9b845c6a42bee1db9bf5d8d4de01b5b15a005b853f0ce251e4a4a20f7",
+                                "s": "6028dc3ce11f4c516e31e8b51d220214c4d6db55cd3453919791987a0f0eeb27",
+                                "recoveryParam": 1
+                            }
+                        }
+                    },
+                    {
+                        "id": "25a05600-5e42-11ec-bcea-1dcf59b0c523",
+                        "outputMap": {
+                            "*option2*": 1,
+                            "0403693c8ef676422ee8abd3249589ecf7bf45bad523796270a4b52d4a1ee74584dca69121f54c31e5369c855fe48d0d1feebbbd0973bad649a49921e42906a137": 0.33299999999999996
+                        },
+                        "input": {
+                            "timestamp": 1639639873376,
+                            "amount": 1.333,
+                            "address": "0403693c8ef676422ee8abd3249589ecf7bf45bad523796270a4b52d4a1ee74584dca69121f54c31e5369c855fe48d0d1feebbbd0973bad649a49921e42906a137",
+                            "signature": {
+                                "r": "46359f97e84daa32c7ded2bd748160ccf02ff450684ac4c6fea3813d33a1bdbb",
+                                "s": "34d5469daa6f4d75835a8f290aac1badc6782529f094dd185673a639353bdb36",
+                                "recoveryParam": 1
+                            }
+                        }
+                    }
+                ],
+                "rewardTransactions": [
+                    {
+                        "input": {
+                            "address": "*winner-reward*"
+                        },
+                        "outputMap": {
+                            "042b129cb7a86fa2c72852300405e2fdaa686d1d995057ee2cc4326bdcaf563a52bd21d869451476e3c740d5d2737aa2d636ffd4f2068a0ddbb030d79e7d274a61": 1.5
+                        }
+                    },
+                    {
+                        "input": {
+                            "address": "*winner-reward*"
+                        },
+                        "outputMap": {
+                            "0403693c8ef676422ee8abd3249589ecf7bf45bad523796270a4b52d4a1ee74584dca69121f54c31e5369c855fe48d0d1feebbbd0973bad649a49921e42906a137": 1.5
+                        }
+                    },
+                    {
+                        "input": {
+                            "address": "*miner-reward*"
+                        },
+                        "outputMap": {
+                            "0424d2f17fa6c82b2c9f9e613eae128383803119976c7bca8161e42ef96f1a08500085f2142ddcd12fc14e0ba0df3263329b3837b4c45335a0d34fbb37660f51ef": 2
+                        }
+                    }
+                ],
+                "newCommerTransactions": [
+                    [
+                        "0424d2f17fa6c82b2c9f9e613eae128383803119976c7bca8161e42ef96f1a08500085f2142ddcd12fc14e0ba0df3263329b3837b4c45335a0d34fbb37660f51ef",
+                        "4bef8e0f62b83fe2f825c096eb16a37522d56ce2ef6fff201e83e7fb7daf68312241cf1cacef56569e6fad559174abef4abf687d2be9bfe55543d0d7a03cb7a99d478f4f9d5178855d884869a64bbd27ae6bff004c0c88b70839775fe9c95a078a103508fe41a991e8b1a6c3d5f1e984f6ee24c765a18912f763c20a5a4d60ac"
+                    ]
+                ]
+            },
+            "questionMap": {
+                "question": "best language",
+                "choices": [
+                    "C++",
+                    "python"
+                ]
+            }
+        },
+        "nonce": 1,
+        "difficulty": 0
+    }
+]
