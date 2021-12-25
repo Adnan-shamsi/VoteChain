@@ -15,18 +15,18 @@
      <td>
         <img src="./media/image2.png" />
      </td>
-     <td >
-       <img src="./media/image3.png" />
-     </td>
    </tr>
    <tr>
      <td>
        <img src="./media/image4.png" />
      </td>
+   </tr>
+     <tr>
      <td>
        <img src="./media/image6.png" />
      </td>
    </tr>
+   
 </table>
 
 
