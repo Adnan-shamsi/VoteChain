@@ -3,7 +3,7 @@
      style="border-radius:50%"/>
 </p>
 
-<img src="./media/image1.png" height="100" />
+<img src="./media/image1.png" />
 
 <table >
    <tr>
