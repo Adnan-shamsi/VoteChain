@@ -90,23 +90,7 @@ router.post("/transact", (req, res) => {
 	res.json({ type: "success", transaction });
 });
 
-router.post("/set-poll", (req, res) => {
 
-	if ( Object.keys(transactionPool.questionMap) != 0) {
-		return res
-			.status(400)
-			.json({ type: "error", message: "only one poll at a time" });
-	}
-	//question: "fsdf"
-	//choices = [1,2];
-	const { question, choices } = req.body;
-	const q = { question, choices };
-
-	transactionPool.setQuestion(q);
-	pubsub.broadcastQuestion(q);
-
-	res.json({ type: "success", q });
-});
 
 router.get("/transaction-pool-map", (req, res) => {
 	res.json({
