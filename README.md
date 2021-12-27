@@ -31,14 +31,14 @@
 
 
 # 🔖 About
-## A decentralized voting system using blockchain technology
+## A decentralized voting ( Polling to be exact ) system using blockchain technology
 - Mining using Proof Of Work
 - Synchronization using redis pub/sub
 
 ## 🚀 Features
 - Polling
 - Add new legit Voters 
-- Cast your votes 
+- Cast your votes
 - Winners of the poll will get some extra voting points and losers will lose some points 
 
 ## 🔥 Getting Started
