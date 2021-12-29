@@ -4,9 +4,15 @@
 </p>
 
 <div align="center">
-<img src="./media/image1.png" height="300"  />
+<table >
+    <tr>
+     <td>
+          <img src="./media/image1.png" height="300"  />
+     </td>
+   </tr>
+</table>
 </div>
- 
+
  <br/>
  <br/>
  
