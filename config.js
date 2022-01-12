@@ -1,4 +1,4 @@
-const MINE_RATE = 2 * 1000 * 60;  //2 minute
+const MINE_RATE = 10 * 1000 * 60;  //10 minute
 const INITIAL_DIFFICULTY = 3;
 
 const GENESIS_DATA = {
